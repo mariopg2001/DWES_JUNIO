@@ -1,0 +1,27 @@
+body{
+    background-color: rgb(177, 122, 51);
+}
+div#divContenedor2{
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(97, 104, 104);
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 30px;
+    box-shadow: 5px 10px 18px #888888;
+}
+table,tr,th,td{
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+
+table{
+   margin:100px auto;
+   
+}
+th{
+    background-color: coral;
+}
+td{
+    background-color: darksalmon;
+}
