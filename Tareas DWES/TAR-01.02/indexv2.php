@@ -36,14 +36,12 @@
         //var_dump($resultado2);
         if($resultado2->num_rows>0){ //si nos devuelve 0 filas el id de la visita no existe y si existe nos mostrará el lugar
             echo'<form method="post" action="indexv2.php">
-                
                 <label>Elige el lugar de visita</label>
                 <select name="lugares">';
 
-                while($fila=$resultado2-> fetch_assoc())//guardamos como array 
-                {
-                    $iplugar=$fila['ip']; //lo añadimos a una variable para poder usarla fuera del while
-                }
+                $fila=$resultado2-> fetch_assoc();//guardamos como array 
+                $iplugar=$fila['ip']; //lo añadimos a una variable para poder usarla fuera del while
+                
 
                 $consulta4= 'SELECT * from lugar'; //consultamos todos los lugares menos la ip que seleccionamos
                 $resultado4 = $conexion->query($consulta4);

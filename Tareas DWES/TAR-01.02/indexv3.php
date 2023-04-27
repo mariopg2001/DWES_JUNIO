@@ -40,10 +40,9 @@
                 <label>Elige el lugar de visita</label>
                 <select name="lugares">';
 
-                while($fila=$resultado2-> fetch_assoc())//guardamos como array 
-                {
-                    $iplugar=$fila['ip']; //lo añadimos a una variable para poder usarla fuera del while
-                }
+                $fila=$resultado2-> fetch_assoc();//guardamos como array 
+                $iplugar=$fila['ip']; //lo añadimos a una variable para poder usarla fuera del while
+                
 
                 $consulta4= 'SELECT * from lugar'; //consultamos todos los lugares menos la ip que seleccionamos
                 $resultado4 = $conexion->query($consulta4);
@@ -60,7 +59,8 @@
                     echo "<option value=".$fila['ip'].">".$fila['lugar']."</option>"; //continuamos añadiendo las opciones partiendo del anterior       
                 }
                $resultado4->data_seek(0);// ponemos el puntero en la posicion 0 para volver a recorrer el array
-                while($fila=$resultado4-> fetch_assoc())
+               ;
+               while( $fila=$resultado4-> fetch_assoc() )
                 {
                         if($fila['ip']!=$iplugar){
                             echo "<option value=".$fila['ip'].">".$fila['lugar']."</option>"; //si no es igual al lugar seleccionado se añade

@@ -31,15 +31,16 @@ if(isset($_POST['guardar'])){
     $primera_palabra = strtolower(substr($_POST['sql'], 0, 6)); //convertimos la consulta a minusculas(strtolower), contamos las 6 primeras letras(substr)
     if($primera_palabra=='select'){ //si las 6 primeras letras son igual a select mandamos la consulta a la funcion consulta
         $consulta1=$modelo->consulta($_POST['sql']); //mandamos la consulta sql al modelo para ejecutarla
-        echo 'La consulta realizada tiene '.$consulta1[1].' filas';
-?>
+        $nfilas=$modelo->filas;
+
+        ?>
         <table>
             <tr>  
     
-            <?php
+        <?php
         $i=1;
-        if($consulta1[1]>0){
-            while($fila=$consulta1[0]-> fetch_assoc())
+        if($nfilas>0){
+            while($fila=$consulta1-> fetch_assoc())
             {
                 if($i==1){ //si i es menor que el numero de columnas nos pondra el encabezado de la columna
 
@@ -56,13 +57,14 @@ if(isset($_POST['guardar'])){
                 }
             }
         }else{
-            echo 'La consulta no ha devuelto filas';
+            echo '<br/>La consulta no ha devuelto filas';
         }
          echo '</tr>
         </table>';
     }elseif($primera_palabra=='insert'){//si las 6 primeras letras son igual a insert mandamos la consulta a la funcion anadir
-        $consulta2=$modelo->anadir($_POST['sql']); //mandamos la consulta sql al modelo para ejecutarla
-        echo 'El número de filas afectadas es: '.$consulta2[1];
+        $consulta2=$modelo->actualizar($_POST['sql']); //mandamos la consulta sql al modelo para ejecutarla
+    }else{
+        echo 'La consulta introducida es incorrecta';
     }
 }
 
