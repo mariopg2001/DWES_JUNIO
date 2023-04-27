@@ -32,21 +32,11 @@
                 echo 'El número de filas afectadas es: '.$this->fila_afectadas;
                 return $result;
             }catch(Exception $e){
-            //   if($e->getCode()==1146){
-            //     echo 'Ya existe un lugar con ese nombre';
-            //   } 
-            //   if($e->getCode()==1062){
-            //     echo 'La clave principal ya existe';
-
-            //   } 
-            // if( $e->getCode()== '1451'){
-            //     echo 'No se puede borrar debido a que el campo está asociado como clave ajena a otro campo ';
-            // }
+              
                if($e->getCode()==1064){
                 echo 'Hay un error de sintaxis en la consulta SQL';
-               }else{
-                echo '<br/>La consulta no cumple algunas restrinciones de la base de datos';
                }
+
             }
         }
     }
