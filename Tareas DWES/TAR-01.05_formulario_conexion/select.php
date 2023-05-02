@@ -16,7 +16,7 @@
         $nfilas=$modelo->filas;
 ?>
 <br><br>
-<a href="index.php"><button>Volver</button></a>
+<a href="inicio.php"><button>Volver</button></a>
 
         <table>
             <tr>              

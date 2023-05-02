@@ -26,7 +26,7 @@
             fwrite($file, "define('BBDD', '".$database."');\n");
             fclose($file);
 
-            header('location: index.php');
+            header('location: inicio.php');
             
         }
     }
