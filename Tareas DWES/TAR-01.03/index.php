@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,18 +22,36 @@
 </html>
 <?php
 
+
+
+
 if(!isset($_POST['guardar'])){
-    echo 'Introduce una consulta';
+    echo 'Introduce una consulta </br>';
+    if(isset($_COOKIE['contador_select'])&& isset($_COOKIE['contador_act'])){
+        echo 'consultas realizadas de consulta: '.$_COOKIE['contador_select'].'</br>';
+        echo 'consultas realizadas de actualizar: '. $_COOKIE['contador_act'].'</br>';
+    }else{
+        setcookie ('contador_select', 0, time()+900);
+        setcookie ('contador_act', 0, time()+900);
+    }
+   
 }
 
+
 if(isset($_POST['guardar'])){
+    echo 'consultas realizadas de consulta: '.$_COOKIE['contador_select'].'</br>';
+    echo 'consultas realizadas de actualizar: '. $_COOKIE['contador_act'].'</br>';
     require_once('./modelo.php');
     $modelo=new Modelo();
     $primera_palabra = strtolower(substr($_POST['sql'], 0, 6)); //convertimos la consulta a minusculas(strtolower), contamos las 6 primeras letras(substr)
     if($primera_palabra=='select'){ //si las 6 primeras letras son igual a select mandamos la consulta a la funcion consulta
         $consulta1=$modelo->consulta($_POST['sql']); //mandamos la consulta sql al modelo para ejecutarla
         $nfilas=$modelo->filas;
-
+        if(isset($_COOKIE['contador_select'])){
+            $_COOKIE['contador_select']++;
+            setcookie ('contador_select',  $_COOKIE['contador_select'], time()+900);
+        }
+       
         ?>
         <table>
             <tr>  
@@ -61,7 +80,13 @@ if(isset($_POST['guardar'])){
         }
          echo '</tr>
         </table>';
-    }elseif($primera_palabra=='insert'){//si las 6 primeras letras son igual a insert mandamos la consulta a la funcion anadir
+    }elseif($primera_palabra=='insert' || $primera_palabra=='update' || $primera_palabra=='delete'){//si las 6 primeras letras son igual a insert mandamos la consulta a la funcion anadir
+       if(isset($_COOKIE['contador_act'])){
+            $_COOKIE['contador_act']++;
+            setcookie ('contador_act',  $_COOKIE['contador_act'], time()+900);
+            
+       }
+        
         $consulta2=$modelo->actualizar($_POST['sql']); //mandamos la consulta sql al modelo para ejecutarla
     }else{
         echo 'La consulta introducida es incorrecta';

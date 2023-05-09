@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sql</title>
+        <title>Sql formulario de conexion</title>
     </head>
     <body>
-    <form action="control.php" method="post">
+    <form action="control2.php" method="post">
         <label>
             Servidor de la base de datos: 
             <input type="text" name="server">
@@ -30,4 +30,5 @@
     
     </body>
 </html>
+
 

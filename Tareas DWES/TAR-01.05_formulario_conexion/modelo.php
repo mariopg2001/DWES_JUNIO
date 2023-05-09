@@ -8,9 +8,14 @@
             $this->conexion=$this->conectar();     
         }
         public function conectar(){
-            $conexion= new mysqli(SERVER,USU,CONTRA,BBDD) or die ('No se puede conectar');
-            $conexion->set_charset('utf8');
-            return $conexion;
+            $conexion= new mysqli(SERVER,USU,CONTRA,BBDD) or die('error de conexion');
+            if ($conexion->connect_error) {
+                die('Error de conexión: ' . $conexion->connect_error);
+            }else{
+                $conexion->set_charset('utf8');
+                  return $conexion;
+            }
+            
         }
         public function consulta($sql){
             try{
