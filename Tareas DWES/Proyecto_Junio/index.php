@@ -19,14 +19,16 @@
     <a href="./Vistas/Flogin.php"><button>Cerrar Sesion</button></a>
     <div id="contenedor">
         <?php
-        require_once( './Controladores/controlador.php');
-        $controlador= new Controlador();
+        require_once( './Controladores/controladorIndex.php');
+        $controlador= new ControladorIndex();
         $nprofesor= $controlador->nombreProfesor($_SESSION['usuario']);
             echo ' Bienvenido '.$nprofesor;
         ?>
     </div>
     <a href="./Vistas/descargar_excel.php"><button>Descargar Profesores</button></a>
     <a href="./Vistas/header.php"><button>Subir profesores</button></a>
+    <a href="./Vistas/correo.php"><button>Enviar Correo</button></a>
+    <?php echo "<a href='./Vistas/reservaCarrito.php?correo=". $_SESSION['usuario']."' ><button>Reserva Carritos</button></a>";?>
     
 </body>
 </html>

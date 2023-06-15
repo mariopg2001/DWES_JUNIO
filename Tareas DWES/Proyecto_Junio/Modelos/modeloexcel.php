@@ -25,9 +25,32 @@
             return $array;
         }
         public function subirDatos($nombre,$correo,$contrasenia){
-            $consulta = "INSERT INTO Profesores(nombre, correo, contrasenia) VALUES ('".$nombre."','".$correo."','".$contrasenia."')";
-            $this->conexion->query($consulta);
+            try{
+                $consulta = "INSERT INTO Profesores(nombre, correo, contrasenia) VALUES ('".$nombre."','".$correo."','".$contrasenia."')";
+                $this->conexion->query($consulta);
+            }catch(Exception $e){
+                echo $e->getCode();
+                echo $e->getMessage();
+            }
+        
            
+        }
+        public function enviarCorreo($nombre,$correo,$contrasenia){
+           try{
+            ini_set('display_errors', '1');
+                $para = $correo;
+                $titulo = 'Contraseña de acceso';
+                $mensaje = 'Hola '.$nombre.' esta es tu contraseña para acceder a la web de reservas '.$contrasenia.'<br /><br /><br />Un Saludo.';
+                $cabeceras = 'From: mperezg30@gmail.com' . "\r\n" .
+                'Reply-To: mperezg30@gmail.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+                mail($para, $titulo, $mensaje, $cabeceras);
+
+           }catch(Exception $e){
+                echo $e->getCode();
+                echo $e->getMessage();
+            }
+
         }
         public function generarContrasena($longitud ) {
             // Caracteres permitidos en la contraseña

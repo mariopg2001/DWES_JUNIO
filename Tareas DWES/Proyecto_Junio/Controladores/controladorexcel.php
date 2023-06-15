@@ -19,6 +19,8 @@
            $resultado=$this->modelo->generarContrasena($longitud);
             return $resultado;
         }
-    
+    public function enviarCorreo($nombre,$correo,$contrasenia){
+        $this->modelo->enviarCorreo($nombre,$correo,$contrasenia);
+    }
         
     }

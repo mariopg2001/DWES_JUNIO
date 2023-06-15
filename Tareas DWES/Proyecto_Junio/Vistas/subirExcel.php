@@ -35,10 +35,10 @@
                 if($row[0] != ''){
                     $contrasenia=$controlador->generarContrasena(8);
                     $consulta2=$controlador->subirDatos($row[0],$row[1],$contrasenia);
-    
+                    $consulta3= $controlador->enviarCorreo($row[0],$row[1],$contrasenia);
                 }
             }
-            header('Location:../index.php');
+            // header('Location:../index.php');
         }else {
             echo "<div id='error'>El tipo de archivo introducido no se puede subir.<br> Solo se permiten archivos de Excel con extensión .xls, .xlsx</div>";
         }   

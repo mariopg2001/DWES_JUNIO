@@ -1,6 +1,6 @@
 <?php
     require_once './Config/config.php';
-    class Modelo{
+    class ModeloIndex{
        private $conexion;
 
         public function __construct(){
@@ -17,5 +17,17 @@
             $result= $this->conexion->query($sql);
             $datos= $result->fetch_assoc();
             return $datos['nombre'];
+        }
+        public function hacerReserva($clase,$hora,$fecha,$correo){
+            $select= 'SELECT idProfesor from Profesores WHERE correo="'.$correo.'"';
+            $id= $this->conexion->query($select);
+            
+        }
+        public function carritos(){
+            $sql= 'SELECT codigoCarrito from Carritos';
+            $result= $this->conexion->query($sql);
+            var_dump($result);
+            return $result;
+            
         }
     }
