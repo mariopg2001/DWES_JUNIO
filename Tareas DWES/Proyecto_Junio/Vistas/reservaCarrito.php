@@ -6,7 +6,8 @@
         $clases=$controlador->clases();
         $usuario=$controlador->profesor($_SESSION['usuario']);
         // $correo=$_GET['correo'];
-        $correo=$_SESSION['usuario'];
+      
+        echo $usuario
         
 ?>
 <!DOCTYPE html>
@@ -29,6 +30,7 @@
                 while($fila=$carritos->fetch_assoc())
                 {
                     foreach($fila as $indice=>$valor){
+                        
                         echo '<option value='.$valor.'>'.$valor.'</option>';
                     }
                 }
@@ -51,9 +53,7 @@
                
                 while($fila2=$clases->fetch_assoc())
                 {
-                    foreach($fila2 as $indice2=>$valor2){
-                        echo '<option value='.$valor2.'>'.$valor2.'</option>';
-                    }
+                    echo '<option value='.$fila2['idClase'].'>'.$fila2['nombre'].'</option>';
                 }
                  ?>
             </select>
@@ -65,6 +65,6 @@
 <?php
     if(isset($_POST['guardar'])){
        
-        $reserva=$controlador->hacerReserva($_POST['clase'],$_POST['horas'],$_POST['fechareserva'], $_POST['carrito'], $usuario);
+        $reserva=$controlador->hacerReserva($_POST['horas'],$_POST['fechareserva'], $usuario,$_POST['clase'],$_POST['carrito']);
     }
 ?>

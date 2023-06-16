@@ -20,8 +20,8 @@ require_once '../Modelos/modeloCarrito.php';
             $resultado=$this->modelo->profesor($correo);
             return $resultado;
         }
-        public function hacerReserva($clase, $hora,$fecha,$carrito,$correo){
-            $resultado=$this->modelo->hacerReserva($clase, $hora,$fecha,$carrito,$correo);
+        public function hacerReserva( $hora,$fecha,$correo,$clase,$carrito){
+            $resultado=$this->modelo->hacerReserva( $hora,$fecha,$correo,$clase,$carrito);
             return $resultado;
         }
     }

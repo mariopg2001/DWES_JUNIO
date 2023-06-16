@@ -26,7 +26,7 @@ require_once "../Config/config.php";
             
         }
         public function clases(){
-            $sql= 'SELECT nombre from Clases';
+            $sql= 'SELECT * from Clases';
             $result= $this->conexion->query($sql);
            
           
@@ -35,23 +35,33 @@ require_once "../Config/config.php";
         } 
          public function profesor($correo){
             $sql= 'SELECT idProfesor from Profesores where correo="'.$correo.'";';
-            $id= $this->conexion->query($sql);
-            var_dump($id);
-          
-            return $id;
+            $result= $this->conexion->query($sql);
+            $datos=$result->fetch_assoc();
+            
+            return $datos['idProfesor'] ;
             
         }
-        public function hacerReserva($clase,$fecha, $hora,$carrito,$correo){        
-          $insertar='INSERT INTO Reservas(fechaDiareserva,hora,idProfesor,tipo) values ("'.$fecha.'",'.$hora.','.$correo.',"c");';
-                    //    INSERT INTO Reservas(fechaHoraRes,fechaDiareserva,hora,idProfesor,tipo) VALUES(CURRENT_TIMESTAMP
-            $this->conexion->query($insertar);
+        public function hacerReserva( $hora,$fecha,$id,$clase,$carrito){ 
+            // var_dump($fecha);
+            // var_dump($hora);   
+            // var_dump($id);   
+
+            //  echo $fecha.'</br>';
+            //  echo $hora.'</br>';
+            //  echo $id.'</br>';
+            $insertar='INSERT INTO Reservas(fechaDiareserva,hora,idProfesor,tipo) values ("'.$fecha.'","'.$hora.'",'.$id.',"c");';
+             $this->conexion->query($insertar);
+            $insertar2= '<br>hola<br>';
+             echo $insertar,$insertar2;
+           
             $idReserva=$this->conexion->insert_id;
-            echo $this->conexion->insert_id;
+            echo $idReserva.'<br><br>';
             
             // $sqlclase= 'SELECT idClase from Clases where nombre="'.$clase.'";';
             // $idclase= $this->conexion->query($sqlclase);
-            // $insertarRcarrito='INSERT INTO ReservaCarrito(idReservaCarrito,codigoCarrito,idClase) values('.$idReserva.',"'.$carrito.'"'.$idclase.');';
-            // $this->conexion->query($insertarRcarrito);
+            $insertarRcarrito='INSERT INTO ReservaCarritos(idReservaCarrito,codigoCarrito,idClase) values('.$idReserva.',"'.$carrito.'",'.$clase.');';
+           echo  $insertarRcarrito;
+             $this->conexion->query($insertarRcarrito);
 
 
             
